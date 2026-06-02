@@ -1,0 +1,11 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        //kadane's algorithm
+        int n=nums.length, ans=nums[0], maxi=nums[0];
+        for(int i=1; i<n; i++){
+            maxi=Math.max(nums[i],nums[i]+maxi);
+            ans=Math.max(ans,maxi);
+        }
+        return ans;
+    }
+}
