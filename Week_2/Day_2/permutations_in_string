@@ -1,0 +1,28 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int n1=s1.length(), n2=s2.length();
+        if(n1>n2) return false;
+
+        int[] fr=new int[26];
+
+        for(int i=0; i<n1; i++){
+            fr[s1.charAt(i)-'a']++;
+        }
+
+        int l=0, h=0, cnt=n1;
+
+        while(h<n2){
+            if(fr[s2.charAt(h)-'a']>0)
+                cnt--;
+            fr[s2.charAt(h)-'a']--;
+            h++;
+            if(cnt==0) return true;
+            if(h-l==n1){
+                if(fr[s2.charAt(l)-'a']>=0) cnt++;
+                fr[s2.charAt(l)-'a']++;
+                l++;
+            }
+        }
+        return false;
+    }
+}
