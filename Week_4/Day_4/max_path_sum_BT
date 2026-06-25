@@ -1,0 +1,16 @@
+class Solution {
+    int d=-1001;
+    public int maxPathSum(TreeNode root) {
+        h(root);
+        return d;
+    }
+    int h(TreeNode root){
+        if(root==null) return 0;
+        int l=Math.max(0, h(root.left)), 
+        r=Math.max(0, h(root.right));
+
+        d=Math.max(d, root.val+l+r);
+        
+        return root.val+Math.max(l,r);
+    }
+}
