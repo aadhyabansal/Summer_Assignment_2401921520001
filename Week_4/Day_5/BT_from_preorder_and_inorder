@@ -1,0 +1,19 @@
+class Solution {
+    Map<Integer,Integer> m=new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int n=preorder.length;
+        for(int i=0; i<n; i++)
+            m.put(inorder[i],i);
+        return helper(preorder,0,n-1,inorder,0,n-1);
+    }
+    public TreeNode helper(int[] preorder, int st, int end, int[] inorder, int inst, int inend){
+        if(st>end || inst>inend) return null;
+        TreeNode root=new TreeNode(preorder[st]);
+
+        int ind=m.get(preorder[st]);
+        int ele=ind-inst;
+        root.left=helper(preorder,st+1,st+ele,inorder,inst,ind-1);
+        root.right=helper(preorder,st+ele+1,end,inorder,ind+1,inend);
+        return root;
+    }
+}
